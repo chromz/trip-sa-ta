@@ -18,8 +18,8 @@ async def train_model():
     return {'Result': 'model.joblib produced'}
 
 @app.get('/predict')
-async def predict_review(sentences: str = Query(..., description='Sentences to process')):
-    return predict(sentences)
+async def predict_review(sentence: str = Query(..., description='Sentences to process')):
+    return predict(sentence)
 
 @app.get('/topics')
 async def topics():
