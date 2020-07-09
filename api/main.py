@@ -15,22 +15,11 @@ app = FastAPI()
 async def train_model():
     train()
     train_topics()
-    return {'Result': 'model.pkl produced'}
+    return {'Result': 'model.joblib produced'}
 
 @app.get('/predict')
-async def predict_review(sentences: List[str] = Query(..., description='Sentences to process')):
-    predictions = predict(sentences)
-
-    response = [
-        {
-            'id': idx + 1,
-            'sentence': sentence,
-            'prediction': sentiment
-        }
-        for idx, (sentence, sentiment) in enumerate(zip(sentences, predictions))
-    ]
-
-    return response
+async def predict_review(sentences: str = Query(..., description='Sentences to process')):
+    return predict(sentences)
 
 @app.get('/topics')
 async def topics():

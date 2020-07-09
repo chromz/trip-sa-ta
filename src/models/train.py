@@ -45,31 +45,15 @@ def train():
 
     negative_word_probs = {}
     for id, count in negative_bow:
-        negative_word_probs[dictionary[id]] = {
-            'id': id,
-            'logprob': np.log((count + 1) / total_negative),
-        }
-
-    negative_word_probs[-1] = {
-        'id': -1,
-        'logprob': np.log(1 / total_negative)
-    }
+        negative_word_probs[dictionary[id]] = np.log((count + 1) / total_negative)
 
     positive_word_probs = {}
     for id, count in positive_bow:
-        positive_word_probs[dictionary[id]] = {
-            'id': id,
-            'logprob': np.log((count + 1) / total_positive),
-        }
-
-    positive_word_probs[-1] = {
-        'id': -1,
-        'logprob': np.log(1 / total_positive)
-    }
+        positive_word_probs[dictionary[id]] = np.log((count + 1) / total_positive)
 
     model = {
-        'POS_PROB': positive_prob,
-        'NEG_PROB': negative_prob,
+        'POS_PROB': np.log(positive_prob),
+        'NEG_PROB': np.log(negative_prob),
         'COND_POS_PROBS': positive_word_probs,
         'COND_NEG_PROBS': negative_word_probs,
     }
