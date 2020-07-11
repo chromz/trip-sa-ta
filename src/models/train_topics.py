@@ -49,7 +49,7 @@ def train_topics():
 
     data_words_nostops = remove_stopwords(data_words)
     data_words_bigrams = make_bigrams(data_words_nostops, bigram_mod)
-    nlp = spacy.load('en_core_web_lg', disable=['parser', 'ner'])
+    nlp = spacy.load('en_core_web_md', disable=['parser', 'ner'])
     data_lemmatized = lemmatization(nlp, data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
     id2word = Dictionary(data_lemmatized)
 
